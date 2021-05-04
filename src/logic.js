@@ -1,6 +1,14 @@
 let TRUE = 1;
 let FALSE = 0;
 
+
+function negation(p)
+{
+    if (p == TRUE)
+        return FALSE;
+    return TRUE;
+}
+
 /*
 p  q  -  p || q
 0  0     0
