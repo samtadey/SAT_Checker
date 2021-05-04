@@ -75,6 +75,16 @@ function equivalence(p,q) {
 }
 
 
+/*
+Changes the input value between 1 and 0
+*/
+function change_val(val)
+{
+    if (val == TRUE)
+        return FALSE;
+    return TRUE;
+}
+
 
 
 
