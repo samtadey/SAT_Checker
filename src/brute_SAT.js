@@ -1,6 +1,13 @@
-
-
-
+/*
+    input:
+        truth: matrix with truth table values for the variables
+        var_map: map with (key:variable, value: variable_id)
+        f_parsed: formula to solved
+        logic: logic symbols mapped to formulas
+    return:
+        results as a matrix
+        returns successful combinations of variables used in the formula
+*/
 function all_solutions(truth, var_map, f_parsed, logic) {
     //let vals = "";
     let results_row;
@@ -35,6 +42,7 @@ function all_solutions(truth, var_map, f_parsed, logic) {
         item: current portion of formula being solved
 
     This function recursively solves a propositional formula.
+    Returns true or false
 */
 function solve(truth, row, var_map, item, logic) {
     let func, a, b;
