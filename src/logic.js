@@ -1,6 +1,14 @@
 let TRUE = 1;
 let FALSE = 0;
 
+
+function negation(p)
+{
+    if (p == TRUE)
+        return FALSE;
+    return TRUE;
+}
+
 /*
 p  q  -  p || q
 0  0     0
@@ -66,6 +74,16 @@ function equivalence(p,q) {
     return FALSE;
 }
 
+
+/*
+Changes the input value between 1 and 0
+*/
+function change_val(val)
+{
+    if (val == TRUE)
+        return FALSE;
+    return TRUE;
+}
 
 
 
