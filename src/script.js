@@ -1,10 +1,29 @@
-//test equations
-//
-// -(p & q) -> r
-// (-(p & q) <-> (r | s))
-// p & -p
-// ((-p | q) + -(r & s)) <-> i
 
+function SAT_prob() {
+    let truth, results, rows, cols, f_parsed;
+    //get input and create Formula Set
+    formula = getInput();
+    f_parsed = parse_dimacs(formula);
+    let fset = new FormulaSet(f_parsed[0], f_parsed.length - 1);
+    //create Individual formulas
+    fset.setFormulas(f_parsed);
+    //
+    //this solution is not scalable
+    rows = Math.pow(2, fset.vars);
+    cols = fset.vars;
+    //
+    //create a truth table of INPUT values
+    truth = init_truth(rows, cols);
+    set_truth_values(truth, rows, cols);
+    //
+    //
+    results = new Array();
+    for (let i = 0; i < truth.length; i++)
+        if (fset.isSatisfiedBy(truth[i]))
+            results.push(truth[i].values);
+            
+    create_results(f_parsed[0], results);
+}
 
 function run()
 {
@@ -13,6 +32,8 @@ function run()
     logic = create_logic_map();
     formula = getInput();
     f_parsed = parse_formula(formula);
+
+    console.log(f_parsed);
 
     //find unique variables in equation
     var_map = map_variables(formula);
@@ -43,34 +64,42 @@ function getInput()
 /*
 AA
 */
-function create_results(var_map, matrix) {
+function create_results(num_vars, matrix) {
 
-    let table, row, cell, text, s = 0;
+    let table, header, row, cell, text, s = 0;
+
     table = document.getElementById("results");
-
     //clear previous results
     table.innerHTML = '';
+    header = document.getElementById("satisfy");
 
-    row = table.insertRow();
-    //set table header
-    var_map.forEach(function(value, key) {
-        cell = document.createElement("th");
-        text = document.createTextNode(key);
-        cell.appendChild(text);
-        row.appendChild(cell);
-    })
-
-    for (let i = 0; i < matrix.length; i++)
+    if (matrix.length > 0)
     {
+        header.innerHTML = "Satisfiable";
         row = table.insertRow();
-        for (let j = 0; j < matrix[i].length; j++)
+        //set table header
+        for (let i = 1; i <= num_vars; i++)
         {
-            cell = document.createElement("td");
-            text = document.createTextNode(matrix[i][j]);
+            cell = document.createElement("th");
+            text = document.createTextNode(i);
             cell.appendChild(text);
             row.appendChild(cell);
         }
+
+        for (let i = 0; i < matrix.length; i++)
+        {
+            row = table.insertRow();
+            for (let j = 0; j < matrix[i].length; j++)
+            {
+                cell = document.createElement("td");
+                text = document.createTextNode(matrix[i][j]);
+                cell.appendChild(text);
+                row.appendChild(cell);
+            }
+        }
     }
+    else    
+        header.innerHTML = "Not Satisfiable";
 }
 
 

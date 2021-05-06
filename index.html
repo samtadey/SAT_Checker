@@ -4,9 +4,10 @@
     <!-- order matters here -->
     <script src="src/proplog_parse.js" type="text/javascript"></script>
     <script src="src/helpers.js" type="text/javascript"></script>
-    <script src="src/logic.js" type="text/javascript"></script>
-    <script src="src/brute_SAT.js" type="text/javascript"></script>
-    <script src="test/test.js" type="text/javascript"></script>
+    <!-- <script src="src/logic.js" type="text/javascript"></script> -->
+    <script src="src/classes/Formula.js" type="text/javascript"></script>
+    <script src="src/classes/Assignment.js" type="text/javascript"></script>
+    <script src="src/classes/FormulaSet.js" type="text/javascript"></script>
     <script src="src/script.js" type="text/javascript"></script>
 
     <!-- <script>
@@ -17,7 +18,7 @@
 <body>
 
     <h1>
-        SAT Checker
+        SAT Satisfier
     </h1>
 
     <div class="center">
@@ -25,11 +26,14 @@
                 <textarea id="input" name="formula">
 
                 </textarea></br>
-                <button onclick="run()">Submit</button>
-                <button onclick="test_core_logic()">Testing (Check Console)</button>
+                <button onclick="SAT_prob()">Submit</button>
                 <p id="return"></p>
         </div>
     </div> 
+
+    <h2 id="satisfy">
+
+    </h2>
 
     <table id="results">
 

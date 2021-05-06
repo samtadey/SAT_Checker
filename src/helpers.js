@@ -1,3 +1,6 @@
+let TRUE = 1;
+let FALSE = 0;
+
 /*
 - input:
     rows: number of rows for the matrix
@@ -8,7 +11,7 @@ function init_truth(rows, cols)
 {
     truth = new Array(rows);
     for (let i = 0; i < truth.length; i++)
-        truth[i] = new Array(cols);
+        truth[i] = new Assignment(cols);
     return truth;
 }
 
@@ -32,14 +35,14 @@ function set_truth_values(truth, rows, cols)
     let val = FALSE;
     let sep = 1;
     let cur;
-    //start in reverse
-    //for (let i = truth[0].length - 1; i--)
+
     for (let i = cols - 1; i > -1; i--)
     {
         cur = 0;
         for (let j = 0; j < rows; j++)
         {
-            truth[j][i] = val;
+            truth[j].values[i] = val;
+            //truth[j][i] = val;
             if (++cur == sep)
             {
                 val = change_val(val);
